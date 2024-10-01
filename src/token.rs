@@ -39,6 +39,8 @@ pub enum TokenKind {
     Eof,
     End,
     Fn,
+    Struct,
+    Return,
 }
 
 #[derive(Clone, Debug)]
@@ -83,7 +85,9 @@ fn token_name(token: &TokenKind) -> &str {
         TokenKind::Load => "Load",
         TokenKind::Extern => "Extern",
         TokenKind::Fn => "Fn",
-        TokenKind::End => "End"
+        TokenKind::End => "End",
+        TokenKind::Struct => "Struct",
+        TokenKind::Return => "Return"
     }
 }
 

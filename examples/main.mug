@@ -1,4 +1,79 @@
-name = 10
+age = 10
 
-fn name(string: name)
+fn foo(number String)
+  return number + number
 end
+
+# struct User
+#   name: String
+#   age: Int
+# end
+#
+# fn greet(user User)
+#   puts("Hello, {user.name}")
+# end
+#
+# module User
+#   fn new(name String, age) User
+#     return User{name, age}
+#   end
+# end
+#
+# user = User::new("Jakub", 28)
+# user.greet()
+#
+# if user.age < 18
+#   puts("You are to young")
+# else
+#   puts("You are not to young")
+# end
+#
+# struct Service
+#   url String
+#   params Record<String, String>
+# end
+#
+# fn call(self Service)
+#   connection = Faraday::new(self.url)
+#
+#   connection.post(|req| {
+#     params.each(|key, value| {
+#
+#     })
+#   })
+# end
+#
+# module Service
+#   fn call(url String, params Record<String, String>)
+#     Service{url, params}.call()
+#   end
+# end
+#
+# Service::call("example.com", params: { "foo": "bar" })
+#
+# user_names Array<String> = [
+#   "Jakub",
+#   "Ola",
+#   "Szymon"
+# ]
+#
+# # short syntax
+# user_names = [
+#   "Jakub",
+#   "Ola",
+#   "Szymon"
+# ]
+#
+# fn map<T, Y>(arr Array<T>, fn callback(val T) Y) Array<Y>
+#   result Array<T> = []
+#
+#   for element in arr
+#     result.push(callback(element))
+#   end
+#
+#   return result
+# end
+#
+# users = user_names.map<String, User>(|name| {
+#   return User{name}
+# })

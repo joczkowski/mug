@@ -102,15 +102,12 @@ impl Tokenizer {
             '}' => self.add_token(TokenKind::RCurly),
             ',' => self.add_token(TokenKind::Comma),
             ':' => self.add_token(TokenKind::Colon),
-            '/' => {
-                if '/' == self.peek() {
-                    while self.peek() != '\n' && !self.at_end() {
-                        self.advance();
-                    }
-                } else {
-                    self.add_token(TokenKind::Slash);
+            '/' => self.add_token(TokenKind::Slash),
+            '#' => {
+                while self.peek() != '\n' && !self.at_end() {
+                    self.advance();
                 }
-            }
+            },
             c if c.is_alphabetic() => self.identifier(),
             c if c.is_numeric() => self.numeric(),
             chr => {
@@ -180,6 +177,8 @@ impl Tokenizer {
             "extern" => self.add_token(TokenKind::Extern),
             "fn" => self.add_token(TokenKind::Fn),
             "end" => self.add_token(TokenKind::End),
+            "struct" => self.add_token(TokenKind::Struct),
+            "return" => self.add_token(TokenKind::Return),
             _ => self.add_token(TokenKind::Identifier(literal)),
         };
     }
@@ -203,7 +202,7 @@ impl Tokenizer {
     }
 
     fn peek(&mut self) -> char {
-        self.source.chars().nth(self.current).unwrap()
+        self.source.chars().nth(self.current).expect("Missing new line at the end of the file")
     }
 
     fn at_end(&self) -> bool {

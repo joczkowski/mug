@@ -1,0 +1,7 @@
+[package]
+name = "mug"
+version = "0.0.1"
+authors = ["Jakub Oczkowski"]
+license = "MIT"
+
+[dependencies]

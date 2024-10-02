@@ -16,6 +16,8 @@ pub enum TokenKind {
     LeftParen,
     LCurly,
     RCurly,
+    LBrace,
+    RBrace,
     While,
     If,
     RightParen,
@@ -41,6 +43,9 @@ pub enum TokenKind {
     Fn,
     Struct,
     Return,
+    Dot,
+    Pipe,
+    DoubleColon
 }
 
 #[derive(Clone, Debug)]
@@ -62,6 +67,8 @@ fn token_name(token: &TokenKind) -> &str {
         TokenKind::Equal => "Equal",
         TokenKind::LCurly => "LCurly",
         TokenKind::RCurly => "RCurly",
+        TokenKind::LBrace => "LBrace",
+        TokenKind::RBrace => "RBrace",
         TokenKind::If => "If",
         TokenKind::While => "While",
         TokenKind::True => "True",
@@ -87,6 +94,9 @@ fn token_name(token: &TokenKind) -> &str {
         TokenKind::Fn => "Fn",
         TokenKind::End => "End",
         TokenKind::Struct => "Struct",
+        TokenKind::Dot => "Dot",
+        TokenKind::DoubleColon => "DoubleColon",
+        TokenKind::Pipe => "Pipe",
         TokenKind::Return => "Return"
     }
 }

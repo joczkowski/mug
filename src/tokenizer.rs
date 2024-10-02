@@ -73,6 +73,15 @@ impl Tokenizer {
             '*' => self.add_token(TokenKind::Asterisk),
             '%' => self.add_token(TokenKind::Percent),
             '"' => self.string(),
+            '.' => self.add_token(TokenKind::Dot),
+            ':' => {
+                if ':' == self.peek() {
+                    self.advance();
+                    self.add_token(TokenKind::DoubleColon);
+                } else {
+                    self.add_token(TokenKind::Colon);
+                }
+            }
             '!' => {
                 if '=' == self.peek() {
                     self.advance();
@@ -92,22 +101,33 @@ impl Tokenizer {
                     self.add_token(TokenKind::DoubleEqual);
                     self.advance();
                 }
-                '>' => {
-                    self.add_token(TokenKind::Arrow);
-                    self.advance();
-                }
                 _ => self.add_token(TokenKind::Equal),
             },
             '{' => self.add_token(TokenKind::LCurly),
             '}' => self.add_token(TokenKind::RCurly),
             ',' => self.add_token(TokenKind::Comma),
-            ':' => self.add_token(TokenKind::Colon),
             '/' => self.add_token(TokenKind::Slash),
             '#' => {
                 while self.peek() != '\n' && !self.at_end() {
                     self.advance();
                 }
             },
+            '>' => match self.peek() {
+                '=' => {
+                    self.add_token(TokenKind::GreaterOrEqual);
+                }
+                _ => self.add_token(TokenKind::Greater),
+            },
+            '<' => match self.peek() {
+                '=' => {
+                    self.add_token(TokenKind::LessOrEqual);
+                }
+                _ => self.add_token(TokenKind::Less)
+                
+            },
+            '|' => self.add_token(TokenKind::Pipe),
+            '[' => self.add_token(TokenKind::LBrace),
+            ']' => self.add_token(TokenKind::RBrace),
             c if c.is_alphabetic() => self.identifier(),
             c if c.is_numeric() => self.numeric(),
             chr => {
